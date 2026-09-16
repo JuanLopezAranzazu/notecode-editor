@@ -1,0 +1,90 @@
+@import "tailwindcss";
+@plugin "tailwindcss-animate";
+
+@theme {
+  --font-sans: "Sora", system-ui, sans-serif;
+  --font-mono: "JetBrains Mono", ui-monospace, SFMono-Regular, monospace;
+
+  /* Ink — app chrome background, from deepest to lightest */
+  --color-ink-950: #0a0c11; /* page root */
+  --color-ink-900: #0e1118; /* app background */
+  --color-ink-800: #141820; /* header / bottom bar */
+  --color-ink-700: #1e232e; /* raised surface (selects, dropdowns, card) */
+  --color-ink-600: #2e3544; /* border on raised surfaces */
+  --color-ink-500: #464f63; /* hover border / secondary icon */
+
+  /* Mist — foreground text, from muted to bright */
+  --color-mist-400: #5b6274;
+  --color-mist-300: #8b92a3;
+  --color-mist-200: #b7bcc7;
+  --color-mist-100: #e7e9ee;
+
+  /* Signal — primary accent (buttons, focus, active states) */
+  --color-signal: #f2c14e;
+  --color-signal-dim: #b4903a;
+
+  /* Mint — success / "saved" state */
+  --color-mint: #5fd3a6;
+
+  /* Danger — error / destructive state */
+  --color-danger: #e06c75;
+
+  --animate-blink-caret: blink-caret 1s step-end infinite;
+}
+
+@keyframes blink-caret {
+  0%,
+  100% {
+    opacity: 1;
+  }
+  50% {
+    opacity: 0;
+  }
+}
+
+html,
+body,
+#root {
+  height: 100%;
+}
+
+body {
+  -webkit-font-smoothing: antialiased;
+  text-rendering: optimizeLegibility;
+}
+
+/* Visible keyboard focus everywhere, on top of Tailwind's utility classes */
+:focus-visible {
+  outline: 2px solid var(--color-signal);
+  outline-offset: 2px;
+}
+
+::selection {
+  background: color-mix(in srgb, var(--color-signal) 35%, transparent);
+}
+
+/* Slim, unobtrusive scrollbar that fits the ink palette */
+::-webkit-scrollbar {
+  width: 10px;
+  height: 10px;
+}
+::-webkit-scrollbar-track {
+  background: transparent;
+}
+::-webkit-scrollbar-thumb {
+  background-color: var(--color-ink-600);
+  border-radius: 999px;
+}
+::-webkit-scrollbar-thumb:hover {
+  background-color: var(--color-ink-500);
+}
+
+@media (prefers-reduced-motion: reduce) {
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+  }
+}
