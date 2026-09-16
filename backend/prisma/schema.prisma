@@ -1,0 +1,23 @@
+// Prisma schema for NoteCode
+// Docs: https://pris.ly/d/prisma-schema
+
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "postgresql"
+  url      = env("DATABASE_URL")
+}
+
+model Snippet {
+  id        String   @id @default(uuid())
+  code      String
+  language  String   @default("plaintext")
+  theme     String   @default("vs-dark")
+  title     String?
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+
+  @@map("snippets")
+}
